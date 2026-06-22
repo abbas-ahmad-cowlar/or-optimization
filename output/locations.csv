@@ -1,0 +1,198 @@
+id,x,y,fixed_dist,type
+1,-33.14,-44.5,53.57,Spare Parts Storage
+2,23.62,21.94,62.58,Recycling Stations
+3,-3.91,-36.29,50.85,Power Grid Connection Points
+4,-7.7,85.95,35.59,Residential and Commercial Areas
+5,-30.75,-6.66,122.67,Available Land Sites
+6,-31.39,-23.6,16.46,Residential and Commercial Areas
+7,9.42,-55.85,147.25,Airport
+8,17.75,1.8,91.56,Residential and Commercial Areas
+9,25.27,101.24,81.81,Residential and Commercial Areas
+10,-12.88,-29.51,61.23,Ministry of Energy Branch
+11,-49.25,-76.02,71.83,Residential and Commercial Areas
+12,81.5,7.03,1.95,Residential and Commercial Areas
+13,-14.16,-40.74,11.28,Turbine and PV Maintenance Center
+14,-51.68,-81.09,7.98,Residential and Commercial Areas
+15,-72.83,-55.09,7.24,Residential and Commercial Areas
+16,53.13,26.33,46.96,Residential and Commercial Areas
+17,-16.52,11.4,76.7,Weather Stations
+18,7.71,92.72,60.11,Residential and Commercial Areas
+19,-12.59,7.68,62.32,Residential and Commercial Areas
+20,39.93,111.33,118.18,Available Land Sites
+21,1.44,-9.33,97.35,City Center Hotel
+22,14.2,20.65,19.33,Residential and Commercial Areas
+23,-44.24,-70.17,138.8,Residential and Commercial Areas
+24,40.62,-54.89,138.47,Governmental Facility
+25,18.28,58.02,133.64,Stadium
+26,-3.46,91.62,4.82,Residential and Commercial Areas
+27,110.91,15.07,45.2,Available Land Sites
+28,-58.5,33.47,87.93,Residential and Commercial Areas
+29,19.49,71.92,61.71,Governmental Facility
+30,-14.92,29.68,79.78,Residential and Commercial Areas
+31,8.27,-13.63,16.42,Residential and Commercial Areas
+32,-54.91,-27.76,133.77,Residential and Commercial Areas
+33,35.89,-28.73,30.36,Spare Parts Storage
+34,21.34,-31.08,134.57,Residential and Commercial Areas
+35,30.95,-24.39,146.0,Residential and Commercial Areas
+36,-12.8,28.12,66.86,Governmental Facility
+37,5.14,31.42,124.65,Residential and Commercial Areas
+38,22.64,20.81,6.71,Residential and Commercial Areas
+39,5.06,42.11,138.48,Power Grid Connection Points
+40,12.11,-20.42,70.15,Spare Parts Storage
+41,-41.06,24.41,78.32,Residential and Commercial Areas
+42,-30.2,56.93,116.06,Residential and Commercial Areas
+43,41.61,25.75,66.91,Available Land Sites
+44,-43.58,-8.96,141.88,Residential and Commercial Areas
+45,-24.89,50.96,70.16,Recycling Stations
+46,11.98,49.67,64.68,Spare Parts Storage
+47,45.65,78.51,146.95,Residential and Commercial Areas
+48,-90.68,100.7,55.63,Disposal Center
+49,-2.43,12.41,100.64,Governmental Facility
+50,24.99,-58.52,83.54,Residential and Commercial Areas
+51,-29.32,-65.87,49.23,Power Grid Connection Points
+52,48.62,-15.32,70.09,Residential and Commercial Areas
+53,-30.69,-30.11,113.65,Residential and Commercial Areas
+54,-83.35,31.45,121.18,Large-scale battery storage facilities
+55,-42.41,-1.12,60.34,Residential and Commercial Areas
+56,-80.14,-25.72,27.41,Residential and Commercial Areas
+57,89.3,-47.34,149.48,Residential and Commercial Areas
+58,42.4,44.75,39.32,Residential and Commercial Areas
+59,39.15,-11.12,77.47,Residential and Commercial Areas
+60,-8.14,-12.03,116.43,Weather Stations
+61,-18.05,-24.97,133.23,Residential and Commercial Areas
+62,35.7,50.84,15.63,Industrial Zone
+63,-31.26,-10.99,10.81,Residential and Commercial Areas
+64,1.07,3.61,105.77,Residential and Commercial Areas
+65,-12.38,-52.33,30.63,Residential and Commercial Areas
+66,-32.89,-7.1,59.55,Residential and Commercial Areas
+67,-22.71,48.01,38.05,Storage and Logistics Centers
+68,-8.24,-81.43,33.41,Residential and Commercial Areas
+69,-33.26,17.07,142.14,Residential and Commercial Areas
+70,-29.32,-30.21,45.18,Residential and Commercial Areas
+71,-2.01,89.75,108.6,Residential and Commercial Areas
+72,9.61,-11.09,93.72,Recycling Stations
+73,70.43,0.47,100.94,Residential and Commercial Areas
+74,34.64,-14.38,53.87,Residential and Commercial Areas
+75,-46.29,-13.81,66.52,Residential and Commercial Areas
+76,16.25,14.52,116.21,Weather Stations
+77,-72.37,-75.6,134.31,Residential and Commercial Areas
+78,-9.01,-140.67,36.92,Disposal Center
+79,-54.89,-23.42,15.68,Residential and Commercial Areas
+80,-20.35,28.34,136.03,Power Grid Connection Points
+81,-35.98,76.45,113.68,Residential and Commercial Areas
+82,-39.47,68.67,15.34,Residential and Commercial Areas
+83,-123.8,1.41,13.21,Port
+84,-28.84,-8.46,127.64,Residential and Commercial Areas
+85,34.46,-51.25,127.16,Residential and Commercial Areas
+86,-41.85,-46.22,88.82,Training Facilities
+87,-11.22,-5.07,77.5,Residential and Commercial Areas
+88,22.12,14.24,78.95,Residential and Commercial Areas
+89,-39.09,15.69,146.08,Residential and Commercial Areas
+90,35.43,88.47,143.73,Large-scale battery storage facilities
+91,-18.09,56.43,98.4,Residential and Commercial Areas
+92,-10.45,53.66,75.83,Residential and Commercial Areas
+93,88.99,-42.2,73.83,Residential and Commercial Areas
+94,-46.26,-34.07,12.71,Residential and Commercial Areas
+95,-34.83,-42.3,91.19,Residential and Commercial Areas
+96,49.41,-8.26,136.24,Power Grid Connection Points
+97,0.71,102.96,74.8,Residential and Commercial Areas
+98,28.33,44.42,95.94,Residential and Commercial Areas
+99,25.93,-46.28,65.65,Residential and Commercial Areas
+100,-21.08,-51.57,136.4,Residential and Commercial Areas
+101,91.63,38.4,85.38,Residential and Commercial Areas
+102,35.23,-21.13,131.79,Residential and Commercial Areas
+103,21.27,38.0,10.36,Metro Station
+104,43.15,33.66,103.37,Residential and Commercial Areas
+105,-62.97,-105.14,71.61,Available Land Sites
+106,59.74,-37.97,141.41,Residential and Commercial Areas
+107,60.04,-29.32,129.63,Residential and Commercial Areas
+108,81.32,26.99,23.69,Residential and Commercial Areas
+109,-100.2,59.79,111.73,Industrial Zone
+110,-44.42,101.34,99.12,Residential and Commercial Areas
+111,-36.53,3.02,18.26,Residential and Commercial Areas
+112,52.87,-43.64,59.99,Residential and Commercial Areas
+113,18.48,-42.89,43.41,Residential and Commercial Areas
+114,63.04,-95.7,18.3,Recycling Area
+115,105.12,37.99,56.84,Port
+116,-2.0,-106.5,109.3,Residential and Commercial Areas
+117,20.78,-23.69,134.14,Residential and Commercial Areas
+118,12.16,-0.3,136.95,Residential and Commercial Areas
+119,67.63,9.16,124.63,Ministry of Energy Branch
+120,25.06,-0.58,136.74,Residential and Commercial Areas
+121,15.8,23.34,104.52,Residential and Commercial Areas
+122,-21.38,72.27,123.18,Residential and Commercial Areas
+123,-128.95,-28.31,58.46,Available Land Sites
+124,-31.3,88.7,134.68,Residential and Commercial Areas
+125,-0.88,-33.24,89.85,Residential and Commercial Areas
+126,42.14,75.4,12.45,Residential and Commercial Areas
+127,-30.77,-35.33,47.52,Residential and Commercial Areas
+128,27.41,-43.73,44.49,Residential and Commercial Areas
+129,0.13,24.76,116.17,Governmental Facility
+130,2.87,45.72,41.45,Residential and Commercial Areas
+131,72.45,2.61,64.22,Residential and Commercial Areas
+132,26.61,-25.83,79.37,Residential and Commercial Areas
+133,-137.97,91.55,98.74,Nuclear Plant
+134,47.62,2.5,74.82,Residential and Commercial Areas
+135,-27.78,16.3,29.57,Residential and Commercial Areas
+136,28.77,68.73,5.98,Residential and Commercial Areas
+137,-18.83,17.96,119.83,Water Cooling Systems Facility
+138,-54.75,67.08,12.29,Residential and Commercial Areas
+139,27.89,-39.69,141.51,Residential and Commercial Areas
+140,24.24,-110.62,99.63,Residential and Commercial Areas
+141,96.75,60.46,67.75,Large-scale battery storage facilities
+142,-87.49,-4.55,126.18,Residential and Commercial Areas
+143,5.37,63.53,124.02,Residential and Commercial Areas
+144,43.48,44.96,41.56,Residential and Commercial Areas
+145,37.86,-3.09,5.92,Governmental Facility
+146,91.83,-24.6,36.19,Residential and Commercial Areas
+147,-20.2,77.4,34.53,Residential and Commercial Areas
+148,-18.49,50.43,29.12,Residential and Commercial Areas
+149,41.53,-35.75,12.85,Noise Monitoring Center
+150,14.77,3.31,68.08,Residential and Commercial Areas
+151,-37.26,84.13,96.44,Residential and Commercial Areas
+152,-77.34,11.45,139.2,Turbine and PV Maintenance Center
+153,-25.53,-17.11,36.58,Residential and Commercial Areas
+154,27.62,96.69,14.53,Residential and Commercial Areas
+155,-57.81,17.28,43.82,Governmental Facility
+156,29.79,36.32,26.82,Residential and Commercial Areas
+157,35.86,34.24,102.15,Residential and Commercial Areas
+158,-57.96,18.68,27.03,Residential and Commercial Areas
+159,-26.64,45.59,57.21,Governmental Facility
+160,12.44,-85.65,123.98,Residential and Commercial Areas
+161,-15.84,10.57,7.53,Storage and Logistics Centers
+162,20.94,-17.58,43.81,Power Grid Connection Points
+163,17.65,92.19,24.24,Residential and Commercial Areas
+164,-70.31,73.53,0.34,Reworking Station
+165,-46.58,-55.97,41.65,Residential and Commercial Areas
+166,59.14,-1.35,74.15,Residential and Commercial Areas
+167,21.7,-52.06,21.08,Residential and Commercial Areas
+168,17.23,0.08,76.96,Weather Stations
+169,51.81,102.41,27.18,Residential and Commercial Areas
+170,-118.41,-28.66,14.28,Available Land Sites
+171,43.18,47.45,19.09,Residential and Commercial Areas
+172,14.96,-8.16,71.81,Power Grid Connection Points
+173,-30.68,-59.31,31.58,Residential and Commercial Areas
+174,43.73,-45.91,115.1,Residential and Commercial Areas
+175,-73.88,-59.9,17.03,Residential and Commercial Areas
+176,2.2,3.69,83.7,Residential and Commercial Areas
+177,74.71,-30.69,140.25,Storage and Logistics Centers
+178,-35.47,-76.71,21.31,Residential and Commercial Areas
+179,-1.26,-41.9,90.66,Residential and Commercial Areas
+180,-26.83,48.57,8.31,Centrlized Hospital
+181,33.98,21.75,104.0,Residential and Commercial Areas
+182,82.33,8.3,92.95,Residential and Commercial Areas
+183,17.11,48.61,106.78,Governmental Facility
+184,-26.41,7.16,61.58,Power Grid Connection Points
+185,39.14,10.95,5.36,Residential and Commercial Areas
+186,55.81,83.33,145.26,Residential and Commercial Areas
+187,26.16,-41.89,12.81,Residential and Commercial Areas
+188,-9.02,-36.68,22.04,Turbine and PV Maintenance Center
+189,-6.14,-30.38,1.48,Residential and Commercial Areas
+190,-59.69,53.25,61.19,Residential and Commercial Areas
+191,112.59,-92.93,1.09,Industrial Zone
+192,2.55,1.58,13.19,Wildlife Monitoring Stations
+193,-30.34,-42.07,83.88,Residential and Commercial Areas
+194,-37.71,-11.02,123.52,Residential and Commercial Areas
+195,-0.2,0.1,115.91,Residential and Commercial Areas
+196,8.94,-95.75,36.11,Residential and Commercial Areas
+197,26.94,-26.56,53.45,Power Grid Connection Points
