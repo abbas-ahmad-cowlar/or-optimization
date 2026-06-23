@@ -69,15 +69,24 @@ def build_rows():
                              runtime_s=m["mean_runtime"], status="",
                              notes=f"{m['n_seeds']} seeds"))
     p1f = _load("p1_full_metaheuristics.json")
+    p1b = _load("p1_bounds.json")
     if p1f:
         best_full = min(m["best_cost"] for m in p1f.values())
         for method, m in p1f.items():
+            gap = (p1b["gap_to_glb_pct"] if (p1b and m["best_cost"] == best_full)
+                   else 100.0 * (m["best_cost"] - best_full) / best_full)
+            note = (f"certified within {p1b['gap_to_glb_pct']:.1f}% of optimum (GL bound)"
+                    if (p1b and m["best_cost"] == best_full) else "vs best heuristic")
             rows.append(dict(problem="P1-QAP", scope="full(30->197)", method=method,
-                             objective=m["best_cost"],
-                             gap_pct=100.0 * (m["best_cost"] - best_full) / best_full,
+                             objective=m["best_cost"], gap_pct=gap,
                              mean=m["mean_cost"], std=m["std_cost"],
-                             runtime_s=m["mean_runtime"], status="",
-                             notes="gap vs best heuristic (no exact)"))
+                             runtime_s=m["mean_runtime"], status="", notes=note))
+    if p1b:
+        rows.append(dict(problem="P1-QAP", scope="full(30->197)",
+                         method="GL lower bound", objective=p1b["glb"], gap_pct=0.0,
+                         mean=p1b["glb"], std=0.0, runtime_s="", status="valid bound",
+                         notes=f"random mean {p1b['random_mean']:,.0f}; "
+                               f"seed std {p1b['seed_std_pct']:.1f}%"))
 
     # ---------------- P3 (storage) ----------------
     p3 = _load("p3_results.json")
@@ -92,11 +101,17 @@ def build_rows():
                              objective=m["best_cost"], gap_pct=m.get("gap_to_coi_pct"),
                              mean=m["mean_cost"], std=m["std_cost"], runtime_s="",
                              status="", notes="ordering of 20 products"))
+        if p3.get("popularity_cost"):
+            rows.append(dict(problem="P3-storage", scope="full(25189 slots)",
+                             method="popularity", objective=p3["popularity_cost"],
+                             gap_pct=100.0 * (p3["popularity_cost"] - p3["coi_optimal"]) / p3["coi_optimal"],
+                             mean=p3["popularity_cost"], std="", runtime_s="", status="",
+                             notes="throughput-only naive policy"))
         rows.append(dict(problem="P3-storage", scope="full(25189 slots)",
                          method="random(mean)", objective=p3["random_mean"],
                          gap_pct=100.0 * (p3["random_mean"] - p3["coi_optimal"]) / p3["coi_optimal"],
                          mean=p3["random_mean"], std="", runtime_s="", status="",
-                         notes="baseline"))
+                         notes="weak baseline"))
     return rows
 
 

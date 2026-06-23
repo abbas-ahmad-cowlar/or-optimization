@@ -63,12 +63,14 @@ def main(quick=False):
     coi_cost = inst.evaluate(coi_order)
     print(f"[P3] COI optimal travel = {coi_cost:,.1f}")
 
-    # ---- random-ordering baseline ----
+    # ---- baselines: random AND a realistic naive policy ----
     rng = np.random.default_rng(config.SEED)
     rand_costs = [inst.evaluate(rng.permutation(P)) for _ in range(2000)]
+    pop_cost = inst.evaluate(inst.popularity_order())   # throughput-only (ignores cube)
     print(f"[P3] random ordering: mean={np.mean(rand_costs):,.0f}  "
-          f"best-of-2000={np.min(rand_costs):,.0f}  "
-          f"(COI saves {100*(1-coi_cost/np.mean(rand_costs)):.1f}% vs mean)")
+          f"(COI saves {100*(1-coi_cost/np.mean(rand_costs)):.1f}% vs random mean)")
+    print(f"[P3] popularity (throughput-only) policy: {pop_cost:,.0f}  "
+          f"(COI saves {100*(1-coi_cost/pop_cost):.1f}% vs popularity)")
 
     # ---- metaheuristics over the 20-product ordering ----
     enc = PermutationEncoding(P, inst.evaluate)
@@ -102,6 +104,9 @@ def main(quick=False):
         "coi_order": [int(i) for i in coi_order],
         "random_mean": float(np.mean(rand_costs)),
         "random_best": float(np.min(rand_costs)),
+        "popularity_cost": float(pop_cost),
+        "savings_vs_popularity_pct": 100.0 * (1 - coi_cost / pop_cost),
+        "savings_vs_random_pct": 100.0 * (1 - coi_cost / float(np.mean(rand_costs))),
         "metaheuristics": meta,
         "exact_lp": {"objective": lp["objective"], "coi_downscaled": coi_small,
                      "matches": bool(lp_matches), "n_slots": small.total_slots,

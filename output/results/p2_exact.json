@@ -287,8 +287,11 @@
     59,
     136
   ],
-  "runtime": 17.145338300033472,
+  "runtime": 18.076843000017107,
   "time_limit": 120,
   "lp_lower_bound": 773553.3620177489,
-  "lp_gap_pct": 11.882715351515516
+  "lp_gap_pct": 11.882715351515516,
+  "build_everywhere_cost": 1033711.0,
+  "build_everywhere_n": 137,
+  "savings_vs_build_everywhere_pct": 15.076079628568628
 }

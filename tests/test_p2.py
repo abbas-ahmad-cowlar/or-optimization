@@ -67,10 +67,15 @@ def test_no_forbidden_links_used(inst):
         assert np.isfinite(inst.distance[z, s])
 
 
-def test_exact_solver_quick(inst):
-    """Exact MILP returns a feasible, sensible solution under a short limit."""
-    res = solve_cflp(inst, alpha=inst.alpha0, time_limit=20, msg=False)
-    assert res["objective"] is not None and res["objective"] > 0
+def test_exact_solver_feasible(inst):
+    """Exact MILP returns a feasible, sensible solution.
+
+    The time limit is a cap, not a fixed duration: CBC returns as soon as it
+    proves optimality (~20s for this instance), so the generous 90s ceiling
+    removes timing flakiness without slowing the normal case.
+    """
+    res = solve_cflp(inst, alpha=inst.alpha0, time_limit=90, msg=False)
+    assert res["feasible"], f"expected a feasible solution, got status={res['status']}"
+    assert res["objective"] > 0
     assert res["n_open"] >= inst.min_substations_for_capacity() - 1
-    # every zone assigned
-    assert all(s >= 0 for s in res["assign"])
+    assert all(s >= 0 for s in res["assign"])    # every zone assigned

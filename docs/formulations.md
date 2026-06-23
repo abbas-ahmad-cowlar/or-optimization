@@ -65,7 +65,12 @@ This has $O(|\mathcal{D}|^2|\mathcal{L}|^2) \approx 3.4\times10^{9}$ product ter
 type-compatible locations, which collapses most $a_{ik}=0$, and/or shrink $\mathcal{L}$), and use a
 **permutation metaheuristic** for the full $30\to197$ problem. A more compact alternative
 (Kaufman–Broeckx linearization, $O(|\mathcal{D}||\mathcal{L}|)$ extra variables) is noted as a fallback if the
-reduced MILP is still heavy.
+reduced MILP is still heavy. Note that generic branch-and-cut (CBC) is unreliable on the QAP even at $K=8$ —
+it can stall and report a sub-optimal incumbent as "optimal" — so the reduced baseline uses **brute-force
+enumeration**. For the full instance (no tractable optimum), quality is certified with a **Gilmore–Lawler
+lower bound** (a valid but loose bound: $\text{LB}=\min_{\text{LAP}}\sum_i \ell_{ik}$ where
+$\ell_{ik}=\langle\text{sorted-desc }f_i,\ \text{sorted-asc }d_k\rangle$), complemented by random-restart and
+seed-stability analysis.
 
 ### Heuristic encoding
 A solution is an injective map $\pi:\mathcal{D}\to\mathcal{L}$ with $a_{i,\pi(i)}=1$. The objective evaluates

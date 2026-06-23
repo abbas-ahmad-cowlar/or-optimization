@@ -166,15 +166,24 @@ def plot_p1_layout(solution):
     _save(fig, "p1_layout.png")
 
 
-def plot_p1_convergence(full):
-    fig, ax = plt.subplots(figsize=(7, 5))
+def plot_p1_convergence(full, bounds=None):
+    fig, ax = plt.subplots(figsize=(7.5, 5))
     for method, m in full.items():
         h = m["best_history"]
-        ax.plot(np.linspace(0, 1, len(h)), h, label=f"{method} (best={m['best_cost']:,.0f})", lw=1.8)
+        ax.plot(np.linspace(0, 1, len(h)), h,
+                label=f"{method} (best={m['best_cost']:,.0f})", lw=1.8)
+    if bounds:
+        ax.axhline(bounds["random_mean"], ls=":", color="#94a3b8", lw=1.2,
+                   label=f"random mean ({bounds['random_mean']:,.0f})")
+        ax.axhline(bounds["glb"], ls="--", color="#16a34a", lw=1.4,
+                   label=f"GL lower bound ({bounds['glb']:,.0f})")
+        ax.set_title(f"P1 - QAP convergence (full 30->197): SA certified within "
+                     f"{bounds['gap_to_glb_pct']:.0f}% of optimum", fontweight="bold")
+    else:
+        ax.set_title("P1 - QAP convergence: GA vs SA (full 30->197)", fontweight="bold")
     ax.set_xlabel("search progress (normalized)")
     ax.set_ylabel("best-so-far cost")
-    ax.set_title("P1 - QAP convergence: GA vs SA (full 30->197)", fontweight="bold")
-    ax.legend()
+    ax.legend(fontsize=9)
     _save(fig, "p1_convergence.png")
 
 
@@ -204,13 +213,20 @@ def plot_p3(sol, results):
     _save(fig, "p3_storage.png")
 
     if results:
-        fig, ax = plt.subplots(figsize=(6, 4.5))
-        labels = ["random\n(mean)", "COI\n(optimal)"]
-        vals = [results["random_mean"], results["coi_optimal"]]
-        ax.bar(labels, vals, color=["#94a3b8", "#16a34a"], alpha=0.9)
-        save = 100 * (1 - results["coi_optimal"] / results["random_mean"])
+        fig, ax = plt.subplots(figsize=(7, 4.5))
+        labels = ["random\n(mean)", "popularity\n(throughput-only)", "COI\n(optimal)"]
+        vals = [results["random_mean"],
+                results.get("popularity_cost", results["random_mean"]),
+                results["coi_optimal"]]
+        ax.bar(labels, vals, color=["#94a3b8", "#f59e0b", "#16a34a"], alpha=0.9)
+        for i, v in enumerate(vals):
+            ax.text(i, v, f"{v:,.0f}", ha="center", va="bottom", fontsize=9)
+        s_pop = results.get("savings_vs_popularity_pct",
+                            100 * (1 - results["coi_optimal"] / results.get("popularity_cost", 1)))
         ax.set_ylabel("expected travel")
-        ax.set_title(f"P3 - COI saves {save:.1f}% vs random", fontweight="bold")
+        ax.set_title(f"P3 - COI saves {s_pop:.1f}% vs a realistic popularity policy",
+                     fontweight="bold")
+        ax.set_ylim(0, max(vals) * 1.12)
         _save(fig, "p3_savings.png")
 
 
@@ -252,10 +268,11 @@ def main():
 
     p1sol = _load("p1_solution.json")
     p1full = _load("p1_full_metaheuristics.json")
+    p1bounds = _load("p1_bounds.json")
     if p1sol:
         plot_p1_layout(p1sol)
     if p1full:
-        plot_p1_convergence(p1full)
+        plot_p1_convergence(p1full, p1bounds)
 
     p3sol = _load("p3_solution.json")
     p3res = _load("p3_results.json")

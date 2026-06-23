@@ -27,6 +27,13 @@ def test_coi_beats_random(inst):
     assert coi <= min(randvals) + 1e-6           # COI is optimal -> no random beats it
 
 
+def test_coi_beats_popularity(inst):
+    """COI (optimal) is at least as good as the throughput-only naive policy."""
+    coi = inst.evaluate(inst.coi_order())
+    pop = inst.evaluate(inst.popularity_order())
+    assert coi <= pop + 1e-6
+
+
 def test_coi_is_optimal_bruteforce_small():
     """On a 6-product sub-instance, COI matches brute-force optimum."""
     from itertools import permutations

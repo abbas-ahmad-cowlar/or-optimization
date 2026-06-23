@@ -51,6 +51,11 @@ class StorageInstance:
         """Optimal product ordering: ascending COI (nearest slots first)."""
         return np.argsort(self.coi())
 
+    def popularity_order(self):
+        """Throughput-only ordering (ignores cube) -- a common naive policy
+        that COI improves on by accounting for storage volume."""
+        return np.argsort(-self.throughput)
+
     def evaluate(self, order):
         """Total expected travel for a product ordering.
 

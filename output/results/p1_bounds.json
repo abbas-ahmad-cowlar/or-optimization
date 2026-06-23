@@ -1,0 +1,11 @@
+{
+  "glb": 3199174.6916386723,
+  "best_method": "SA",
+  "best_cost": 4928975.922736668,
+  "gap_to_glb_pct": 54.070233664294264,
+  "random_mean": 24922885.92147221,
+  "random_best": 17473026.235488057,
+  "improvement_over_random_mean_pct": 80.2230931912659,
+  "seed_std_pct": 1.9197581499116385,
+  "n_random": 5000
+}

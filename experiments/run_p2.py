@@ -116,6 +116,16 @@ def main(quick=False, exact_only=False):
     exact["lp_lower_bound"] = lp["objective"]
     if exact["objective"] and lp["objective"]:
         exact["lp_gap_pct"] = 100.0 * (exact["objective"] - lp["objective"]) / exact["objective"]
+
+    # "build everywhere" baseline: a substation in every zone (each self-serves).
+    # This is the do-nothing-clever policy; optimization consolidates onto fewer.
+    be_cost, be_feas, _ = inst.total_cost(np.ones(inst.n, dtype=bool), alpha)
+    exact["build_everywhere_cost"] = be_cost
+    exact["build_everywhere_n"] = inst.n
+    if exact["objective"]:
+        exact["savings_vs_build_everywhere_pct"] = 100.0 * (1 - exact["objective"] / be_cost)
+        print(f"      build-everywhere ({inst.n} subs) = {be_cost:,.0f}  ->  "
+              f"optimization saves {exact['savings_vs_build_everywhere_pct']:.1f}%")
     _dump("p2_exact.json", exact)
     _dump("p2_solution.json", {
         "alpha": alpha, "objective": exact["objective"],

@@ -34,6 +34,29 @@ def brute_force_qap(flow, distance):
             "assign": best_assign.tolist(), "n_perms": math.factorial(n)}
 
 
+def gilmore_lawler_bound(flow, distance):
+    """Gilmore-Lawler lower bound for the (possibly rectangular) QAP.
+
+    A valid lower bound on  min sum_{i!=j} f_ij d_{pi(i)pi(j)}  when assigning n
+    facilities to n of m >= n locations: for each facility i at location k, the
+    minimal interaction it can incur is the scalar product of i's (n-1) largest
+    flows with k's (n-1) smallest distances (rearrangement inequality); a linear
+    assignment over that leader matrix ties the choices together. The bound is
+    known to be loose, but it *certifies* that no layout can cost less, turning a
+    heuristic result into a provable "within X% of optimal" statement.
+    """
+    from scipy.optimize import linear_sum_assignment
+    n, m = flow.shape[0], distance.shape[0]
+    L = np.zeros((n, m))
+    for i in range(n):
+        f_top = np.sort(np.delete(flow[i], i))[::-1]          # n-1 largest flows from i
+        for k in range(m):
+            d_small = np.sort(np.delete(distance[k], k))[:n - 1]  # n-1 smallest dists from k
+            L[i, k] = float(np.dot(f_top, d_small))
+    row, col = linear_sum_assignment(L)
+    return float(L[row, col].sum())
+
+
 def solve_qap(flow, distance, time_limit=120, msg=False):
     """Solve a square QAP exactly. Returns a result dict.
 

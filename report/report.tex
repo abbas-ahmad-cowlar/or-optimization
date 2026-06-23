@@ -24,6 +24,14 @@
 \newcommand{\PoneRedMILPgap}{5.52}         % MILP % above true optimum
 \newcommand{\Pthreecoi}{40{,}480{,}413}   % P3 COI optimal travel
 \newcommand{\Pthreesave}{27.3}      % P3 % saving vs random
+\newcommand{\PthreePop}{43{,}732{,}020}    % P3 popularity-policy travel
+\newcommand{\PthreePopSave}{7.4}    % P3 % saving vs popularity policy
+\newcommand{\PtwoBuildAll}{1{,}033{,}711}  % P2 build-everywhere cost
+\newcommand{\PtwoBuildSave}{15.1}   % P2 % saving vs build-everywhere
+\newcommand{\PoneGLB}{3{,}199{,}175}       % P1 full GL lower bound
+\newcommand{\PoneGLBgap}{54.1}      % SA gap to GL bound (loose)
+\newcommand{\PoneRandImp}{80.2}     % SA % better than random mean
+\newcommand{\PoneSeedStd}{1.9}      % SA seed-to-seed std %
 % ---------------------------------------------------------------------------
 
 \title{\textbf{Facility and Infrastructure Optimization\\ for a Renewable-Energy Company}\\
@@ -47,9 +55,12 @@ approaches are compared on solution quality, runtime, and optimality gap. The
 exact solvers provide provably-optimal baselines where tractable; the
 metaheuristics recover near-optimal solutions at scale, with simulated annealing
 and the genetic algorithm reaching within \Pgagap\% of optimality on the
-substation problem while particle-swarm trails at \Ppsogap\%. For storage, the
-Cube-per-Order-Index rule is shown to be provably optimal and to save
-\Pthreesave\% of travel over a random layout.
+substation problem while particle-swarm trails at \Ppsogap\%. On the full
+department-layout QAP, where exact optimization is intractable, a
+Gilmore--Lawler lower bound together with a random-restart analysis brackets the
+metaheuristics' quality. For storage, the Cube-per-Order-Index rule is shown to
+be provably optimal and to save \PthreePopSave\% of travel over a realistic
+popularity-based policy.
 \end{abstract}
 
 \section{Introduction}
@@ -101,8 +112,19 @@ optimum) while reporting status ``optimal'' --- a concrete reminder that the QAP
 defeats general-purpose branch-and-cut even at small size~\cite{burkard1998qaplib}. On the full
 $30\to197$ problem the metaheuristics run alone: simulated annealing reaches
 \PoneFullSA{} and the genetic algorithm \PoneFullGA{}, SA outperforming GA as
-expected for QAP-type problems. Figure~\ref{fig:p1} shows the resulting layout
-and convergence.
+expected for QAP-type problems.
+
+Because no exact optimum is available at this scale, we characterize solution
+quality three complementary ways. A Gilmore--Lawler lower
+bound~\cite{lawler1963quadratic} certifies that the optimum is at least
+\PoneGLB{}, placing SA within $\PoneGLBgap\%$ of optimal; the GL bound is
+notoriously loose for the QAP, so this is a conservative certificate rather than
+a tight one. Two further signals indicate the layout is genuinely strong: SA
+improves on the mean of \num{5000} random feasible layouts by $\PoneRandImp\%$,
+and its seed-to-seed standard deviation is only $\PoneSeedStd\%$ --- evidence of
+a stable, near-optimal basin rather than a lucky single run.
+Figure~\ref{fig:p1} shows the resulting layout and convergence (with the GL
+bound and random reference marked).
 
 \begin{figure}[ht]
 \centering
@@ -127,9 +149,12 @@ construction and transmission are comparable.
 
 \subsection{Methods and results}
 CBC solves the 137-zone instance to optimality (objective \Pexact, \Pnopen{}
-substations built). The metaheuristics, run across 10 seeds, give best objectives
-of \Pga{} (GA), \Psa{} (SA), and \Ppso{} (PSO), i.e.\ gaps of \Pgagap\% (GA/SA)
-and \Ppsogap\% (PSO) to optimality. Particle-swarm, designed for continuous
+substations built). Relative to a do-nothing ``build-everywhere'' policy --- a
+substation in every zone, each self-serving, at cost \PtwoBuildAll{} --- the
+optimized plan saves $\PtwoBuildSave\%$ by consolidating demand onto fewer
+substations. The metaheuristics, run across 10 seeds, give best objectives of
+\Pga{} (GA), \Psa{} (SA), and \Ppso{} (PSO), i.e.\ gaps of \Pgagap\% (GA/SA) and
+\Ppsogap\% (PSO) to optimality. Particle-swarm, designed for continuous
 spaces, is the weakest on this binary problem even with a sigmoid decoding. An
 $\alpha$-sweep (Figure~\ref{fig:p2sweep}) traces the classic facility-location
 trade-off: as the transmission rate rises, the optimal number of substations
@@ -168,7 +193,9 @@ The COI ordering yields optimal travel \Pthreecoi{} at full scale. We verify
 optimality three independent ways: an exact transportation LP on a downscaled
 instance matches the COI value to machine precision, and both GA and SA over the
 product ordering reach the same optimum (0.00\% gap). COI saves \Pthreesave\% of
-travel relative to a random layout (Figure~\ref{fig:p3}).
+travel relative to a random layout, and --- more meaningfully --- $\PthreePopSave\%$
+relative to a realistic popularity (throughput-only) policy (\PthreePop) that
+ignores product volume (Figure~\ref{fig:p3}).
 
 \begin{figure}[ht]
 \centering

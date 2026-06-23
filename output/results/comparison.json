@@ -7,7 +7,7 @@
     "gap_pct": 0.0,
     "mean": 877867.9065107269,
     "std": 0.0,
-    "runtime_s": 17.145338300033472,
+    "runtime_s": 18.076843000017107,
     "status": "Optimal",
     "notes": "n_open=109"
   },
@@ -67,7 +67,7 @@
     "gap_pct": 5.515455534380218,
     "mean": 3032631.332418007,
     "std": 0.0,
-    "runtime_s": 24.3852069999557,
+    "runtime_s": 24.640049299923703,
     "status": "Optimal",
     "notes": "generic linearization stalls on QAP"
   },
@@ -79,7 +79,7 @@
     "gap_pct": 0.0,
     "mean": 2910419.697186094,
     "std": 45788.24239672875,
-    "runtime_s": 5.958153900003526,
+    "runtime_s": 5.89578608002048,
     "status": "",
     "notes": "10 seeds"
   },
@@ -91,7 +91,7 @@
     "gap_pct": 0.0,
     "mean": 2882192.016300154,
     "std": 24242.99714233121,
-    "runtime_s": 2.9223105299752206,
+    "runtime_s": 2.8198615700006484,
     "status": "",
     "notes": "10 seeds"
   },
@@ -103,21 +103,33 @@
     "gap_pct": 2.2301540161516633,
     "mean": 5282909.157594766,
     "std": 264215.22518919606,
-    "runtime_s": 8.196422990004066,
+    "runtime_s": 7.389481179998256,
     "status": "",
-    "notes": "gap vs best heuristic (no exact)"
+    "notes": "vs best heuristic"
   },
   {
     "problem": "P1-QAP",
     "scope": "full(30->197)",
     "method": "SA",
     "objective": 4928975.922736668,
-    "gap_pct": 0.0,
+    "gap_pct": 54.070233664294264,
     "mean": 5067596.231489644,
     "std": 94624.41698391957,
-    "runtime_s": 4.643902659974993,
+    "runtime_s": 4.3461583100026475,
     "status": "",
-    "notes": "gap vs best heuristic (no exact)"
+    "notes": "certified within 54.1% of optimum (GL bound)"
+  },
+  {
+    "problem": "P1-QAP",
+    "scope": "full(30->197)",
+    "method": "GL lower bound",
+    "objective": 3199174.6916386723,
+    "gap_pct": 0.0,
+    "mean": 3199174.6916386723,
+    "std": 0.0,
+    "runtime_s": "",
+    "status": "valid bound",
+    "notes": "random mean 24,922,886; seed std 1.9%"
   },
   {
     "problem": "P3-storage",
@@ -158,6 +170,18 @@
   {
     "problem": "P3-storage",
     "scope": "full(25189 slots)",
+    "method": "popularity",
+    "objective": 43732019.920559384,
+    "gap_pct": 8.032543109479237,
+    "mean": 43732019.920559384,
+    "std": "",
+    "runtime_s": "",
+    "status": "",
+    "notes": "throughput-only naive policy"
+  },
+  {
+    "problem": "P3-storage",
+    "scope": "full(25189 slots)",
     "method": "random(mean)",
     "objective": 55643622.35482788,
     "gap_pct": 37.458138035592334,
@@ -165,6 +189,6 @@
     "std": "",
     "runtime_s": "",
     "status": "",
-    "notes": "baseline"
+    "notes": "weak baseline"
   }
 ]

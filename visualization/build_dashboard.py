@@ -34,6 +34,7 @@ def collect():
         "p2_solution": _load("p2_solution.json"),
         "p1_reduced": _load("p1_reduced.json"),
         "p1_full": _load("p1_full_metaheuristics.json"),
+        "p1_bounds": _load("p1_bounds.json"),
         "p1_solution": _load("p1_solution.json"),
         "p3_results": _load("p3_results.json"),
         "p3_solution": _load("p3_solution.json"),
@@ -128,7 +129,7 @@ function p2Panel(){
   let h=`<div class="grid">
     <div class="card"><div class="kpi accent">${fmt(d&&d.objective)}</div><div class="lbl">exact optimum (CBC)</div></div>
     <div class="card"><div class="kpi">${d?d.n_open:'&mdash;'}</div><div class="lbl">substations built</div></div>
-    <div class="card"><div class="kpi green">+${m?fmt(m.GA.gap_to_exact_pct,2):'&mdash;'}%</div><div class="lbl">GA gap to optimum</div></div>
+    <div class="card"><div class="kpi green">${d&&d.savings_vs_build_everywhere_pct?fmt(d.savings_vs_build_everywhere_pct,1)+'%':'&mdash;'}</div><div class="lbl">saved vs build-everywhere</div></div>
     <div class="card"><div class="kpi red">+${m?fmt(m.PSO.gap_to_exact_pct,2):'&mdash;'}%</div><div class="lbl">PSO gap to optimum</div></div></div>`;
   if(m){ const labels=['exact','GA','SA','PSO'];
     const vals=[d.objective,m.GA.best_cost,m.SA.best_cost,m.PSO.best_cost];
@@ -144,12 +145,13 @@ function p2Panel(){
   return h;
 }
 function p1Panel(){
-  const r=DATA.p1_reduced, f=DATA.p1_full, s=DATA.p1_solution;
+  const r=DATA.p1_reduced, f=DATA.p1_full, s=DATA.p1_solution, b=DATA.p1_bounds;
   let h=`<div class="grid">
-    <div class="card"><div class="kpi accent">${r?fmt(r.exact.objective):'&mdash;'}</div><div class="lbl">reduced ${r?r.K+'&times;'+r.K:''} exact optimum</div></div>
+    <div class="card"><div class="kpi accent">${r?fmt(r.exact.objective):'&mdash;'}</div><div class="lbl">reduced ${r?r.K+'&times;'+r.K:''} exact optimum (enum)</div></div>
     <div class="card"><div class="kpi">${s?fmt(s.objective):'&mdash;'}</div><div class="lbl">best full layout (${s?s.method:''})</div></div>
-    <div class="card"><div class="kpi green">${f?fmt(f.SA.best_cost):'&mdash;'}</div><div class="lbl">SA best (full)</div></div>
-    <div class="card"><div class="kpi amber">${f?fmt(f.GA.best_cost):'&mdash;'}</div><div class="lbl">GA best (full)</div></div></div>`;
+    <div class="card"><div class="kpi green">${b?fmt(b.glb):'&mdash;'}</div><div class="lbl">GL lower bound (full)</div></div>
+    <div class="card"><div class="kpi amber">${b?'within '+fmt(b.gap_to_glb_pct,0)+'%':'&mdash;'}</div><div class="lbl">certified of optimum</div></div></div>`;
+  if(b){ h+=`<div class="desc">The GL bound is loose (a well-known QAP property); complementary evidence that the layout is strong: it is <b>${fmt(b.improvement_over_random_mean_pct,1)}% better than the random-layout mean</b> with only <b>${fmt(b.seed_std_pct,1)}% seed-to-seed variation</b>.</div>`; }
   if(f){ const series=['GA','SA'].map((k,i)=>({name:k,y:f[k].best_history,c:['#fbbf24','#34d399'][i]}));
     h+=`<h2>Full QAP convergence (30&rarr;197)</h2><div class="desc">Simulated annealing typically outperforms the GA on QAP.</div>`+lineChart(series); }
   if(r){ h+=`<h2>Reduced instance: exact vs heuristic</h2>`+barChart(['exact','GA','SA'],
@@ -161,11 +163,12 @@ function p3Panel(){
   const r=DATA.p3_results, s=DATA.p3_solution;
   let h=`<div class="grid">
     <div class="card"><div class="kpi green">${r?fmt(r.coi_optimal):'&mdash;'}</div><div class="lbl">COI optimal travel</div></div>
-    <div class="card"><div class="kpi accent">${r?fmt(100*(1-r.coi_optimal/r.random_mean),1):'&mdash;'}%</div><div class="lbl">saved vs random</div></div>
+    <div class="card"><div class="kpi accent">${r&&r.savings_vs_popularity_pct?fmt(r.savings_vs_popularity_pct,1):'&mdash;'}%</div><div class="lbl">saved vs popularity policy</div></div>
     <div class="card"><div class="kpi">${s?fmt(s.total_slots):'&mdash;'}</div><div class="lbl">storage slots</div></div>
     <div class="card"><div class="kpi">${r&&r.exact_lp.matches?'&#10003;':'&mdash;'}</div><div class="lbl">LP verifies COI optimal</div></div></div>`;
-  if(r){ h+=`<h2>COI vs random layout</h2>`+barChart(['random (mean)','COI (optimal)'],
-      [r.random_mean,r.coi_optimal],{colors:['#94a3b8','#34d399']}); }
+  if(r){ const pop=r.popularity_cost||r.random_mean;
+    h+=`<h2>COI vs baselines</h2>`+barChart(['random (mean)','popularity','COI (optimal)'],
+      [r.random_mean,pop,r.coi_optimal],{colors:['#94a3b8','#fbbf24','#34d399']}); }
   if(s){ const ord=s.order; h+=`<h2>Optimal storage ordering (nearest first)</h2><table>
     <tr><th>rank</th><th>product</th><th class="num">throughput</th><th class="num">storage</th><th class="num">COI</th></tr>`;
     ord.forEach((p,i)=>{ h+=`<tr><td>${i+1}</td><td>${s.product_names[p]}</td><td class="num">${fmt(s.throughput[p])}</td><td class="num">${fmt(s.storage[p])}</td><td class="num">${fmt(s.coi[p],3)}</td></tr>`; });

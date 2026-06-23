@@ -70,6 +70,16 @@ def test_objective_matches_bruteforce_small():
     assert abs(red.objective(assign) - explicit) < 1e-9
 
 
+def test_gl_bound_is_valid_lower_bound():
+    """The Gilmore-Lawler bound never exceeds the true optimum."""
+    from solvers.exact.qap_milp import gilmore_lawler_bound, brute_force_qap
+    inst = build_instance(mode="all")
+    red = inst.reduced([0, 1, 2, 3, 4, 5], [3, 17, 40, 88, 120, 150])
+    glb = gilmore_lawler_bound(red.flow, red.distance)
+    opt = brute_force_qap(red.flow, red.distance)["objective"]
+    assert 0 < glb <= opt + 1e-6
+
+
 def test_brute_force_qap_optimal():
     """Brute force gives the true QAP optimum; no permutation and no MILP beats it."""
     import itertools

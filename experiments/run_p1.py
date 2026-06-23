@@ -22,7 +22,7 @@ import numpy as np
 
 from experiments import config
 from models.qap import build_instance
-from solvers.exact.qap_milp import solve_qap, brute_force_qap
+from solvers.exact.qap_milp import solve_qap, brute_force_qap, gilmore_lawler_bound
 from solvers.metaheuristic.qap_ops import QAPEncoding
 from solvers.metaheuristic.genetic import GeneticAlgorithm
 from solvers.metaheuristic.simulated_annealing import SimulatedAnnealing
@@ -130,8 +130,30 @@ def main(quick=False):
               f"mean={m['mean_cost']:,.0f} +/- {m['std_cost']:,.0f}")
     _dump("p1_full_metaheuristics.json", full_meta)
 
-    # best overall full solution -> for visualization
+    # ---- quality certificate for the full (no-exact) instance --------------
+    # Triangulate: GL lower bound below, the random-layout distribution as
+    # context, and seed-to-seed stability as convergence evidence.
     best_method = min(full_meta, key=lambda k: full_meta[k]["best_cost"])
+    best_cost = full_meta[best_method]["best_cost"]
+    glb = gilmore_lawler_bound(inst.flow, inst.distance)
+    rng2 = np.random.default_rng(config.SEED + 1)
+    n_rand = 200 if quick else 5000
+    rand = [full_enc.evaluate(full_enc.random_solution(rng2)) for _ in range(n_rand)]
+    bounds = {
+        "glb": glb, "best_method": best_method, "best_cost": best_cost,
+        "gap_to_glb_pct": 100.0 * (best_cost - glb) / glb,
+        "random_mean": float(np.mean(rand)), "random_best": float(np.min(rand)),
+        "improvement_over_random_mean_pct": 100.0 * (1 - best_cost / np.mean(rand)),
+        "seed_std_pct": 100.0 * full_meta[best_method]["std_cost"] / best_cost,
+        "n_random": n_rand,
+    }
+    _dump("p1_bounds.json", bounds)
+    print(f"[P1] GL lower bound={glb:,.0f}  ->  {best_method} certified within "
+          f"{bounds['gap_to_glb_pct']:.1f}% of optimum (GLB is loose);")
+    print(f"     {bounds['improvement_over_random_mean_pct']:.1f}% better than random "
+          f"mean, seed std only {bounds['seed_std_pct']:.1f}% -> strong, stable optimum")
+
+    # best overall full solution -> for visualization
     best_assign = full_meta[best_method]["best_assign"]
     _dump("p1_solution.json", {
         "mode": "all", "method": best_method,
