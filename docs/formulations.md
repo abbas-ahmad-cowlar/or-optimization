@@ -92,7 +92,8 @@ forbidden links.
 | $q_z \ge 0$ | expected demand of zone $z$ | $\sum_z q_z = 138{,}255$ |
 | $c_s \ge 0$ | cost to construct a substation at $s$ | — |
 | $\kappa_s \ge 0$ | capacity of a substation at $s$ | $\sum_s \kappa_s = 254{,}041$ |
-| $d_{zs}\in\mathbb{R}_{\ge0}\cup\{\infty\}$ | transmission distance, zone $z$ ↔ substation $s$ ($\infty$ = not allowed) | — |
+| $d_{zs}\in\mathbb{R}_{\ge0}\cup\{\infty\}$ | transmission distance, zone $z$ ↔ substation $s$ ($\infty$ = not allowed). Raw diagonal is $\infty$; we set $d_{ss}=0$ (a substation serves its own zone for free) — see A8. | — |
+| $\alpha > 0$ | transmission rate (cost per unit demand·distance); calibrated from the data so construction and transmission are comparable — see A8 | — |
 
 > **⚠ Unit / feasibility note.** The sheet labels demand as "×1000 KWh" and capacity as "×100 KWh".
 > Applied literally, total demand ($138{,}255{,}000$ KWh) is $5.4\times$ total capacity
@@ -106,7 +107,9 @@ $$y_s=\begin{cases}1 & \text{substation built at } s\\ 0 & \text{otherwise}\end{
 x_{zs}=\begin{cases}1 & \text{zone } z \text{ served by substation } s\\ 0 & \text{otherwise}\end{cases}$$
 
 ### Model (single-source CFLP)
-$$\min \underbrace{\sum_{s\in\mathcal{Z}} c_s\, y_s}_{\text{construction}} \; + \; \underbrace{\sum_{z\in\mathcal{Z}}\sum_{s\in\mathcal{Z}} d_{zs}\, q_z\, x_{zs}}_{\text{transmission}}$$
+$$\min \underbrace{\sum_{s\in\mathcal{Z}} c_s\, y_s}_{\text{construction}} \; + \; \alpha\underbrace{\sum_{z\in\mathcal{Z}}\sum_{s\in\mathcal{Z}} d_{zs}\, q_z\, x_{zs}}_{\text{transmission}}$$
+
+with $d_{ss}=0$ (self-service free) and the transmission rate $\alpha$ controlling the construction-vs-transmission trade-off: small $\alpha$ → consolidate onto few substations (save construction, accept transmission); large $\alpha$ → open many substations (minimize transmission). We report the **optimum as a function of $\alpha$** (number of substations and cost split), a classic facility-location sensitivity curve, and pick a calibrated baseline $\alpha_0$ for the headline solution.
 
 subject to
 $$\sum_{s} x_{zs}=1 \qquad\forall z \qquad\text{(every zone served exactly once)}$$
@@ -187,6 +190,7 @@ Each is encoded explicitly in code and revisited if results look wrong.
 | **A5** | P2 demand and capacity are treated in a **common unit** (raw tabulated values), overriding the literal "×1000" / "×100" labels, because the literal reading is infeasible (demand $5.4\times$ capacity). | Critical — without this the model has no feasible solution. |
 | **A6** | P3 travel uses a **single I/O point** with a simple rack-distance model for $\delta_s$; no dock list is given. | Affects absolute travel numbers, not the COI ranking. |
 | **A7** | Units are kept raw internally; conversions to KWh/\$ happen only at reporting time. | Avoids scaling bugs. |
+| **A8** | P2 sets the (raw-$\infty$) distance diagonal to $d_{ss}=0$ and introduces a transmission rate $\alpha$, calibrated so mean construction ≈ mean nearest-neighbour transmission. Without $\alpha$, transmission (mean $d\approx10^5$) dwarfs construction ($\approx10^4$) and the model degenerates to "build everywhere". | Makes P2 a genuine, non-degenerate facility-location trade-off; we report an $\alpha$-sweep. |
 
 ---
 

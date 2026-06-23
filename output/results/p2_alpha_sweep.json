@@ -1,0 +1,86 @@
+[
+  {
+    "source": "heuristic-GA",
+    "n_open": 88,
+    "construction": 522223.0,
+    "transmission": 133280.73878342472,
+    "objective": 655503.7387834247,
+    "is_optimal": false,
+    "alpha_mult": 0.1,
+    "alpha": 9.72702191624229e-05,
+    "feasible": true,
+    "status": "Not Solved"
+  },
+  {
+    "source": "heuristic-GA",
+    "n_open": 98,
+    "construction": 647541.0,
+    "transmission": 98229.55196366296,
+    "objective": 745770.551963663,
+    "is_optimal": false,
+    "alpha_mult": 0.25,
+    "alpha": 0.00024317554790605724,
+    "feasible": true,
+    "status": "Not Solved"
+  },
+  {
+    "source": "exact",
+    "n_open": 99,
+    "construction": 623957.0,
+    "transmission": 151133.0926370476,
+    "objective": 775090.0926370476,
+    "is_optimal": true,
+    "alpha_mult": 0.5,
+    "alpha": 0.0004863510958121145,
+    "feasible": true,
+    "status": "Optimal"
+  },
+  {
+    "source": "exact",
+    "n_open": 109,
+    "construction": 727100.0,
+    "transmission": 150767.90651072687,
+    "objective": 877867.9065107269,
+    "is_optimal": true,
+    "alpha_mult": 1.0,
+    "alpha": 0.000972702191624229,
+    "feasible": true,
+    "status": "Optimal"
+  },
+  {
+    "source": "exact",
+    "n_open": 122,
+    "construction": 877040.0,
+    "transmission": 67437.43465788513,
+    "objective": 944477.4346578851,
+    "is_optimal": true,
+    "alpha_mult": 2.0,
+    "alpha": 0.001945404383248458,
+    "feasible": true,
+    "status": "Optimal"
+  },
+  {
+    "source": "exact",
+    "n_open": 127,
+    "construction": 943165.0,
+    "transmission": 43663.66505888198,
+    "objective": 986828.665058882,
+    "is_optimal": true,
+    "alpha_mult": 4.0,
+    "alpha": 0.003890808766496916,
+    "feasible": true,
+    "status": "Optimal"
+  },
+  {
+    "source": "exact",
+    "n_open": 134,
+    "construction": 1004969.0,
+    "transmission": 15073.789707233775,
+    "objective": 1020042.7897072338,
+    "is_optimal": true,
+    "alpha_mult": 10.0,
+    "alpha": 0.00972702191624229,
+    "feasible": true,
+    "status": "Optimal"
+  }
+]
