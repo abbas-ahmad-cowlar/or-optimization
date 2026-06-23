@@ -10,8 +10,9 @@ env/
 .mypy_cache/
 .ipynb_checkpoints/
 
-# Experiment scratch (keep committed results; ignore tmp)
+# Experiment scratch (keep committed JSON/CSV results; ignore console logs)
 output/results/*.tmp
+output/results/*.log
 
 # LaTeX build artifacts
 report/*.aux
