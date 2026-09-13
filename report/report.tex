@@ -2,6 +2,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{booktabs}
 \usepackage{siunitx}
 \usepackage{xcolor}
@@ -126,7 +127,7 @@ a stable, near-optimal basin rather than a lucky single run.
 Figure~\ref{fig:p1} shows the resulting layout and convergence (with the GL
 bound and random reference marked).
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.62\textwidth]{p1_layout.png}\\
 \includegraphics[width=0.62\textwidth]{p1_convergence.png}
@@ -160,7 +161,7 @@ $\alpha$-sweep (Figure~\ref{fig:p2sweep}) traces the classic facility-location
 trade-off: as the transmission rate rises, the optimal number of substations
 increases and transmission cost falls.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.92\textwidth]{p2_alpha_sweep.png}
 \caption{P2: optimal number of substations and the construction/transmission cost
@@ -168,7 +169,7 @@ split as a function of the transmission rate $\alpha$.}
 \label{fig:p2sweep}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.92\textwidth]{p2_method_comparison.png}\\
 \includegraphics[width=0.55\textwidth]{p2_network.png}
@@ -197,7 +198,7 @@ travel relative to a random layout, and --- more meaningfully --- $\PthreePopSav
 relative to a realistic popularity (throughput-only) policy (\PthreePop) that
 ignores product volume (Figure~\ref{fig:p3}).
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.92\textwidth]{p3_storage.png}
 \caption{P3: products by throughput, storage, and COI (left), and the optimal
